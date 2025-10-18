@@ -1,19 +1,32 @@
-run = ["python", "manage.py", "runserver", "0.0.0.0:3000"]
+run = ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
 entrypoint = "manage.py"
-modules = ["python-3.10:v18-20230807-322e88b"]
+modules = ["nodejs-20", "python-3.10:v18-20230807-322e88b"]
 
 hidden = [".pythonlibs"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["screen"]
 
 [unitTest]
 language = "python3"
 
 [deployment]
-run = ["python", "manage.py", "runserver", "0.0.0.0:3000"]
+run = ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 deploymentTarget = "gce"
 
 [[ports]]
 localPort = 3000
 externalPort = 80
+
+[[ports]]
+localPort = 3001
+externalPort = 3001
+
+[[ports]]
+localPort = 8000
+externalPort = 8000
+
+[agent]
+expertMode = true
